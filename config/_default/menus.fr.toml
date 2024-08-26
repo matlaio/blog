@@ -1,0 +1,55 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+name = "Blog"
+url = "/"
+weight = 1
+
+[[main]]
+name = "Moi"
+url = "about/"
+weight = 2
+
+[[main]]
+weight = 3
+name = "Pages"
+hasChildren = true
+
+[[main]]
+parent = "Pages"
+name = "Categories"
+url = "categories/"
+
+[[main]]
+parent = "Pages"
+name = "Sample"
+url = "elements/"
+
+[[main]]
+parent = "Pages"
+name = "Ressources & Liens"
+url = "ressources/"
+
+[[main]]
+parent = "Pages"
+name = "404 Page"
+url = "404/"
+
+
+
+# footer menu
+[[footer]]
+name = "About"
+url = "about/"
+weight = 1
+
+[[footer]]
+name = "Sample"
+url = "elements/"
+weight = 2
+
+[[footer]]
+name = "Privacy Policy"
+url = "privacy-policy/"
+weight = 3

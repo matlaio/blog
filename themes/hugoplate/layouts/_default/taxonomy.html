@@ -1,0 +1,14 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+  <section>
+    <div class="container">
+      <div class="row gx-1">
+          {{ range .Data.Pages }}
+            <div class="mb-14">
+              {{ partial "components/blog-card" . }}
+            </div>
+          {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

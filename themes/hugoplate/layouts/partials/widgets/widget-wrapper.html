@@ -1,0 +1,7 @@
+<div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
+  {{ range .Widgets }}
+    <div>
+    {{ partial ( print "widgets/" . ) $.Scope }}
+    </div>
+  {{ end }}
+</div>
