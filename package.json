@@ -17,7 +17,7 @@
     "theme-setup": "node ./scripts/themeSetup.js",
     "format": "prettier -w .",
     "install:hugo": "curl -L https://github.com/gohugoio/hugo/releases/download/v0.121.1/hugo_0.121.1_Linux-64bit.tar.gz -o hugo.tar.gz && tar -xzf hugo.tar.gz && mv hugo /usr/local/bin",
-    "build-blog": "npm run install:hugo && npm build"
+    "build-blog": "npm run install:hugo && npm run build"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",

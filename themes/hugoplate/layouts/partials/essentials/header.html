@@ -79,7 +79,7 @@
         {{ else }}
           <li class="nav-item">
             <a
-              class="nav-link {{ if $active }}active{{- end -}}"
+              class="nav-link {{ if $active }}active{{- end -}} "
               {{ if findRE `^http` .URL }}
                 target="_blank" rel="noopener"
               {{ end }}
@@ -117,10 +117,17 @@
           </button>
         {{ end }}
       {{ end }}
-
       
-      {{ partial "components/theme-switcher" (dict "Class" "mr-5") }}
-
+      
+    
+      
+      <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+          <button data-theme-switcher id="theme-toggle" class="w-8 h-8 bg-dark text-white hover:bg-gray-500 rounded-full flex items-center justify-center dark:bg-white dark:text-dark ">
+            <i id="theme-toggle-icon" class="fas fa-moon"></i>
+          </button>
+        
+        <!-- {{ partial "components/theme-switcher" (dict "Class" "mr-5") }} -->
+      </div>
 
       <!-- navigation btn -->
       {{ if site.Params.navigation_button.enable }}
@@ -132,4 +139,49 @@
       {{ end }}
     </div>
   </nav>
-</header>
+  
+
+  <script>
+    // Sélectionne le bouton et l'icône
+     // Sélectionne le bouton et l'icône
+     const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleIcon = document.getElementById('theme-toggle-icon');
+
+    // Fonction pour basculer le thème et enregistrer l'état
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        themeToggleIcon.classList.remove('fa-sun');
+        themeToggleIcon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light'); // Sauvegarde le thème clair
+      } else {
+        document.documentElement.classList.add('dark');
+        themeToggleIcon.classList.remove('fa-moon');
+        themeToggleIcon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark'); // Sauvegarde le thème sombre
+      }
+    }
+
+    // Écouteur d'événement pour le bouton de changement de thème
+    themeToggleBtn.addEventListener('click', toggleTheme);
+
+    // Fonction pour appliquer le thème basé sur le Local Storage ou les préférences système
+    function applyTheme() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+        themeToggleIcon.classList.remove('fa-moon');
+        themeToggleIcon.classList.add('fa-sun');
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeToggleIcon.classList.remove('fa-sun');
+        themeToggleIcon.classList.add('fa-moon');
+      }
+    }
+
+    // Appliquer le thème au chargement de la page
+    applyTheme();
+
+  </script>

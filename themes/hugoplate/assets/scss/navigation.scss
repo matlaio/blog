@@ -68,7 +68,7 @@ input#nav-toggle:checked ~ #nav-menu {
   @apply inline-flex;
 
   label {
-    @apply bg-border relative inline-block h-4 w-6 cursor-pointer rounded-2xl lg:w-10;
+    @apply bg-border relative inline-block cursor-pointer lg:w-10;
   }
 
   input {
