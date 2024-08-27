@@ -35,7 +35,7 @@
 <header
   class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30 bg-theme-light dark:bg-darkmode-theme-light  shadow-md">
 
-  <div class="container mx-auto px-4 grid grid-cols-5 gap-4 items-center">
+  <div class="container mx-auto px-4 grid md:grid-cols-5 md:gap-4 items-center sm:grid-cols-3 sm:gap-3">
 
     <!-- Bloc Gauche (Logo) - Colonne 1 -->
     <div class="">
@@ -85,7 +85,7 @@
     </nav>
 
     <!-- Bloc Droit (Icônes/Boutons) - Colonne 5 -->
-    <div class="flex justify-end space-x-4 sm:col-span-3">
+    <div class="flex justify-end space-x-4">
       {{ with site.Params.search }}
       {{ if .enable }}
       <button aria-label="search"
