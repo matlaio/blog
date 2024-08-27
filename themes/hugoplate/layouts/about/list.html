@@ -1,6 +1,5 @@
 {{ define "main" }}
 <section class="section">
-
   <div class="container">
     <div class="grid sm:grid-flow-col sm:grid-rows-3">
       <div class="sm:row-span-3 sm:pr-10">
@@ -15,7 +14,7 @@
       <div class="sm:col-span-2">
         <ul class="social-icons inline-block align-bottom ">
           {{ range site.Data.social.main }}
-          <li>
+          <li class="mt-5 sm:mt-0">
             <a target="_blank" aria-label="{{ .name }}" rel="nofollow noopener" href="{{ .link | safeURL }}">
               <i class="{{ .icon }}"></i>
             </a>
@@ -24,30 +23,6 @@
         </ul>
       </div>
     </div>
-
-    <!-- <div class="grid sm:grid-cols-2">
-      <div class="">
-        {{ partial "image" (dict "Src" .Params.image "Alt" .Title "Class" "mx-auto mb-6" "Size" "200x200") }}
-      </div>
-      
-
-      <div class="grid sm:grid-cols-1">
-        <div>
-          <h1>{{site.Data.bio.name}}</h1>
-          <p>{{site.Data.bio.short_phrase}}</p>
-        </div>
-        <ul class="social-icons">
-          {{ range site.Data.social.main }}
-          <li>
-            <a target="_blank" aria-label="{{ .name }}" rel="nofollow noopener" href="{{ .link | safeURL }}">
-              <i class="{{ .icon }}"></i>
-            </a>
-          </li>
-          {{ end }}
-        </ul>
-      </div>
-    </div> -->
-
     <div class="row justify-center">
       <div class="">
         <div class="content">{{ .Content }}</div>

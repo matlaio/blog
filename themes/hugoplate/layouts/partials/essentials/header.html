@@ -35,7 +35,7 @@
 <header
   class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30 bg-theme-light dark:bg-darkmode-theme-light  shadow-md">
 
-  <div class="container mx-auto px-4 grid md:grid-cols-5 md:gap-4 items-center sm:grid-cols-3 sm:gap-3">
+  <div class="container mx-auto px-4 grid md:grid-cols-5 md:gap-4 items-center grid-cols-3 gap-3">
 
     <!-- Bloc Gauche (Logo) - Colonne 1 -->
     <div class="">
@@ -62,10 +62,10 @@
             </svg>
           </button>
           <!-- Dropdown menu -->
-          <ul class="dropdown-menu absolute w-48 bg-white rounded-md shadow-lg z-10 ">
+          <ul class="dropdown-menu absolute w-48 bg-theme-light dark:bg-darkmode-theme-light z-10 ">
             {{ range .Children }}
             <li>
-              <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+              <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-dark dark:text-white  hover:bg-gray-200 dark:hover:bg-neutral-900">
                 {{ .Name }}
               </a>
             </li>
@@ -102,7 +102,7 @@
       </button>
 
       <!-- Menu Burger (affiché uniquement sur mobile) -->
-      <button id="burger-menu" class="md:hidden text-black hover:text-blue-500">
+      <button id="burger-menu" class="md:hidden text-black dark:text-white">
         <!-- Icône du menu burger -->
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -121,8 +121,8 @@
       {{ $active := eq $menuURL $pageURL }}
       {{ if .HasChildren }}
       <!-- Menu déroulant mobile pour "Pages" -->
-      <div class="w-full">
-        <button class="text-black hover:text-blue-500 flex items-center w-full justify-center mobile-dropdown-button">
+      <div class="w-full pb-4">
+        <button class="text-xl text-black dark:text-white flex items-center w-full justify-center mobile-dropdown-button">
           {{ .Name }}
           <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
@@ -130,30 +130,22 @@
           </svg>
         </button>
         <!-- Dropdown menu pour mobile -->
-        <div class="mobile-menu-hidden mt-2 w-full bg-white rounded-md shadow-lg">
+        <div class="mobile-menu-hidden mt-2 w-full bg-whitemode-theme dark:bg-darkmode-theme-light pb-4">
           {{ range .Children }}
-          <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+          <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-black dark:text-white hover:bg-gray-100">
             {{ .Name }}
           </a>
           {{ end }}
         </div>
       </div>
       {{ else }}
-      <a href="{{ $menuURL }}" class="text-black hover:text-blue-500 block">
+      <a href="{{ $menuURL }}" class="text-xl text-black dark:text-white block pb-4">
         {{ .Name }}
       </a>
       {{ end }}
       {{ end }}
     </nav>
   </div>
-
-
-
-
-
-
-
-
 
 </header>
 
