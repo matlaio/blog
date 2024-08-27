@@ -1,88 +1,103 @@
 <style>
- /* Styles additionnels pour afficher le menu déroulant sur les grands écrans */
- .dropdown:hover .dropdown-menu,
-    .dropdown-menu:hover {
-      display: block;
-    }
+  /* Styles additionnels pour afficher le menu déroulant sur les grands écrans */
+  .dropdown:hover .dropdown-menu,
+  .dropdown-menu:hover {
+    display: block;
+  }
 
-    .dropdown-menu {
-      transition: opacity 0.3s ease;
-      opacity: 0;
-      display: none;
-    }
+  .dropdown-menu {
+    transition: opacity 10s ease;
+    opacity: 0;
+    display: none;
+  }
 
-    .dropdown:hover .dropdown-menu {
-      opacity: 1;
-    }
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+  }
 </style>
-<header class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30">
-  <div class="container mx-auto px-4 flex items-center justify-between">
 
-    <!-- Bloc Gauche (Logo) -->
-    <div class="flex-shrink-0 bg-red-500 p-2">
+
+
+
+
+
+
+
+<header class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30 bg-theme-light dark:bg-darkmode-theme-light  shadow-md">
+
+  <div class="container mx-auto px-4 grid grid-cols-5 gap-4 items-center">
+
+    <!-- Bloc Gauche (Logo) - Colonne 1 -->
+    <div class="">
       <a class="navbar-brand block text-white text-xl font-bold" href="{{ site.Home.RelPermalink }}">
         {{ partial "logo" }}
       </a>
     </div>
 
-    <!-- Menu de Navigation Centré -->
-    <nav class="hidden md:flex mx-auto space-x-4">
-      {{ $currentPage := . }}
-      {{ range site.Menus.main }}
+    <!-- Menu de Navigation Centré - Colonnes 2-4 -->
+    <nav class="col-span-3">
+      <ul class="hidden md:flex space-x-8 justify-center items-center min-h-20">
+        {{ $currentPage := . }}
+        {{ range site.Menus.main }}
         {{ $menuURL := .URL | absLangURL }}
         {{ $pageURL := $currentPage.Permalink | absLangURL }}
         {{ $active := eq $menuURL $pageURL }}
         {{ if .HasChildren }}
-          <div class="relative dropdown">
-            <button class="text-black hover:text-blue-500 flex items-center">
-              {{ .Name }}
-              <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div class="dropdown-menu absolute hidden mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-              {{ range .Children }}
-                <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                  {{ .Name }}
-                </a>
-              {{ end }}
-            </div>
-          </div>
+        <li class="relative dropdown">
+          <button class="text-lg text-black flex items-center dark:text-white">
+            {{ .Name }}
+            <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <ul class="dropdown-menu absolute w-48 bg-white rounded-md shadow-lg z-10 ">
+            {{ range .Children }}
+            <li>
+              <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                {{ .Name }}
+              </a>
+            </li>
+            {{ end }}
+          </ul>
+        </li>
         {{ else }}
-          <a href="{{ $menuURL }}" class="text-black hover:text-blue-500 {{ if $active }}font-bold{{ end }}">
+        <li>
+          <a href="{{ $menuURL }}" class="text-lg text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}">
             {{ .Name }}
           </a>
+        </li>
         {{ end }}
-      {{ end }}
+        {{ end }}
+      </ul>
     </nav>
 
-    <!-- Bloc Droit (Icônes/Boutons) -->
-    <div class="flex-shrink-0 flex items-center space-x-4">
+    <!-- Bloc Droit (Icônes/Boutons) - Colonne 5 -->
+    <div class="flex justify-end space-x-4">
       {{ with site.Params.search }}
       {{ if .enable }}
-        <button aria-label="search"
-                class="border-border text-dark hover:text-primary dark:border-darkmode-border mr-5 inline-block border-r pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
-                data-target="search-modal">
-          <i class="fa-solid fa-search"></i>
-        </button>
+      <button aria-label="search"
+        class="border-border text-dark hover:text-primary dark:border-darkmode-border inline-block border-r pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
+        data-target="search-modal">
+        <i class="fa-solid fa-search"></i>
+      </button>
       {{ end }}
       {{ end }}
 
       <button data-theme-switcher id="theme-toggle"
-              class="w-8 h-8 bg-dark text-white hover:bg-gray-500 rounded-full flex items-center justify-center dark:bg-white dark:text-dark">
+        class="w-8 h-8 bg-dark text-white hover:bg-gray-500 rounded-full flex items-center justify-center dark:bg-white dark:text-dark">
         <i id="theme-toggle-icon" class="fas fa-moon"></i>
       </button>
 
       <!-- Menu Burger (affiché uniquement sur mobile) -->
-      <div class="md:hidden ml-auto">
-        <button id="burger-menu" class="text-black hover:text-blue-500">
-          <!-- Icône du menu burger -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+      <button id="burger-menu" class="md:hidden text-black hover:text-blue-500">
+        <!-- Icône du menu burger -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -91,35 +106,47 @@
     <nav class="flex flex-col items-center space-y-2 mt-4 text-center">
       {{ $currentPage := . }}
       {{ range site.Menus.main }}
-        {{ $menuURL := .URL | absLangURL }}
-        {{ $pageURL := $currentPage.Permalink | absLangURL }}
-        {{ $active := eq $menuURL $pageURL }}
-        {{ if .HasChildren }}
-          <!-- Menu déroulant mobile pour "Pages" -->
-          <div class="w-full">
-            <button class="text-black hover:text-blue-500 flex items-center w-full justify-center">
-              {{ .Name }}
-              <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <!-- Dropdown menu pour mobile -->
-            <div class="hidden mt-2 w-full bg-white rounded-md shadow-lg">
-              {{ range .Children }}
-                <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                  {{ .Name }}
-                </a>
-              {{ end }}
-            </div>
-          </div>
-        {{ else }}
-          <a href="{{ $menuURL }}" class="text-black hover:text-blue-500 block">
+      {{ $menuURL := .URL | absLangURL }}
+      {{ $pageURL := $currentPage.Permalink | absLangURL }}
+      {{ $active := eq $menuURL $pageURL }}
+      {{ if .HasChildren }}
+      <!-- Menu déroulant mobile pour "Pages" -->
+      <div class="w-full">
+        <button class="text-black hover:text-blue-500 flex items-center w-full justify-center">
+          {{ .Name }}
+          <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <!-- Dropdown menu pour mobile -->
+        <div class="hidden mt-2 w-full bg-white rounded-md shadow-lg">
+          {{ range .Children }}
+          <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
             {{ .Name }}
           </a>
-        {{ end }}
+          {{ end }}
+        </div>
+      </div>
+      {{ else }}
+      <a href="{{ $menuURL }}" class="text-black hover:text-blue-500 block">
+        {{ .Name }}
+      </a>
+      {{ end }}
       {{ end }}
     </nav>
   </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
 </header>
 
 <script>
@@ -167,12 +194,3 @@
   applyTheme();
 </script>
 
-
-
-
-
-
-  </nav>
-
-
-  
