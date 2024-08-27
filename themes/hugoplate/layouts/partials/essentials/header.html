@@ -1,20 +1,29 @@
 <style>
-  /* Styles additionnels pour afficher le menu déroulant sur les grands écrans */
-  .dropdown:hover .dropdown-menu,
-  .dropdown-menu:hover {
-    display: block;
-  }
+    /* Styles additionnels pour afficher le menu déroulant sur les grands écrans */
+    .dropdown:hover .dropdown-menu,
+    .dropdown-menu:hover {
+      display: block;
+    }
 
-  .dropdown-menu {
-    transition: opacity 10s ease;
-    opacity: 0;
-    display: none;
-  }
+    .dropdown-menu {
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      display: none;
+    }
 
-  .dropdown:hover .dropdown-menu {
-    opacity: 1;
-  }
-</style>
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+    }
+
+    /* Styles pour afficher le menu mobile et les sous-menus */
+    .mobile-menu-hidden {
+      display: none;
+    }
+
+    .mobile-menu-visible {
+      display: block;
+    }
+  </style>
 
 
 
@@ -23,7 +32,8 @@
 
 
 
-<header class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30 bg-theme-light dark:bg-darkmode-theme-light  shadow-md">
+<header
+  class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30 bg-theme-light dark:bg-darkmode-theme-light  shadow-md">
 
   <div class="container mx-auto px-4 grid grid-cols-5 gap-4 items-center">
 
@@ -35,8 +45,8 @@
     </div>
 
     <!-- Menu de Navigation Centré - Colonnes 2-4 -->
-    <nav class="col-span-3">
-      <ul class="hidden md:flex space-x-8 justify-center items-center min-h-20">
+    <nav class="md:col-span-3">
+      <ul class="hidden md:flex space-x-14 justify-center items-center min-h-20">
         {{ $currentPage := . }}
         {{ range site.Menus.main }}
         {{ $menuURL := .URL | absLangURL }}
@@ -64,7 +74,8 @@
         </li>
         {{ else }}
         <li>
-          <a href="{{ $menuURL }}" class="text-lg text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}">
+          <a href="{{ $menuURL }}"
+            class="text-lg text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}">
             {{ .Name }}
           </a>
         </li>
@@ -74,11 +85,11 @@
     </nav>
 
     <!-- Bloc Droit (Icônes/Boutons) - Colonne 5 -->
-    <div class="flex justify-end space-x-4">
+    <div class="flex justify-end space-x-4 sm:col-span-3">
       {{ with site.Params.search }}
       {{ if .enable }}
       <button aria-label="search"
-        class="border-border text-dark hover:text-primary dark:border-darkmode-border inline-block border-r pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
+        class=" text-dark hover:text-primary dark:border-darkmode-border inline-block  md:pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
         data-target="search-modal">
         <i class="fa-solid fa-search"></i>
       </button>
@@ -86,15 +97,14 @@
       {{ end }}
 
       <button data-theme-switcher id="theme-toggle"
-        class="w-8 h-8 bg-dark text-white hover:bg-gray-500 rounded-full flex items-center justify-center dark:bg-white dark:text-dark">
+        class="w-8 h-8 bg-dark text-white hover:bg-gray-500 rounded-full  items-center justify-center dark:bg-white dark:text-dark">
         <i id="theme-toggle-icon" class="fas fa-moon"></i>
       </button>
 
       <!-- Menu Burger (affiché uniquement sur mobile) -->
       <button id="burger-menu" class="md:hidden text-black hover:text-blue-500">
         <!-- Icône du menu burger -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
@@ -112,7 +122,7 @@
       {{ if .HasChildren }}
       <!-- Menu déroulant mobile pour "Pages" -->
       <div class="w-full">
-        <button class="text-black hover:text-blue-500 flex items-center w-full justify-center">
+        <button class="text-black hover:text-blue-500 flex items-center w-full justify-center mobile-dropdown-button">
           {{ .Name }}
           <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +130,7 @@
           </svg>
         </button>
         <!-- Dropdown menu pour mobile -->
-        <div class="hidden mt-2 w-full bg-white rounded-md shadow-lg">
+        <div class="mobile-menu-hidden mt-2 w-full bg-white rounded-md shadow-lg">
           {{ range .Children }}
           <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
             {{ .Name }}
@@ -136,8 +146,6 @@
       {{ end }}
     </nav>
   </div>
-  </div>
-
 
 
 
@@ -158,7 +166,7 @@
     mobileMenu.classList.toggle('hidden');
   });
 
-  // Gestion du thème et du menu déroulant sur mobile
+  // Gestion du thème
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeToggleIcon = document.getElementById('theme-toggle-icon');
 
@@ -192,5 +200,18 @@
   }
 
   applyTheme();
-</script>
 
+  // Gestion des sous-menus mobiles
+  document.querySelectorAll('.mobile-dropdown-button').forEach(button => {
+    button.addEventListener('click', function () {
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu.classList.contains('mobile-menu-hidden')) {
+        dropdownMenu.classList.remove('mobile-menu-hidden');
+        dropdownMenu.classList.add('mobile-menu-visible');
+      } else {
+        dropdownMenu.classList.remove('mobile-menu-visible');
+        dropdownMenu.classList.add('mobile-menu-hidden');
+      }
+    });
+  });
+</script>
