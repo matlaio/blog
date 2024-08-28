@@ -1,6 +1,6 @@
 #################### default parameters ################################
 # favicon module: https://github.com/gethugothemes/hugo-modules/tree/master/images#favicon-implementation
-favicon = "images/favicon.png"
+favicon = "images/favicon5.png"
 # logo module: https://github.com/gethugothemes/hugo-modules/tree/master/images#logo-implementation
 logo = "images/logo-whitemode2.png"
 logo_darkmode = "images/logo-darkmode2.png"
@@ -56,7 +56,7 @@ show_categories = true
 # seo meta data for OpenGraph / Twitter Card
 # seo module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo
 [metadata]
-keywords = ["Boilerplate", "Hugo"]
+keywords = ["blog", "Mathieu", "Laplaige", "Mathieu Laplaige"]
 description = "Hugo & Tailwindcss Starter"
 author = "zeon.studio"
 image = "images/og-image.png"

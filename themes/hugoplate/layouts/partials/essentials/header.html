@@ -73,10 +73,7 @@
         </li>
         {{ else }}
         <li>
-          <a href="{{ $menuURL }}"
-            class="text-md text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}">
-            a{{ .Name }}
-          </a>
+          <p> active {{ $active }} menu url {{ $menuURL }} page url {{ $pageURL }} </p>
           <a class="text-md text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}" {{ if findRE `^http` .URL }} target="_blank"
             rel="noopener" {{ end }} href="{{- if findRE `^#` .URL -}}
                     {{- if not $.IsHome -}}
