@@ -1,7 +1,7 @@
 {{ define "main" }}
 <section class="">
   <div class="container text-center">
-    <div class="from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light rounded-2xl  px-8 py-8">
+    <div class="from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light rounded-2xl  px-8 pt-8 pb-4">
       <h1>Blog</h1>
       <!-- {{ partial "components/breadcrumb" (dict "Context" . "Class" "mt-6") }} -->
     </div>
@@ -10,10 +10,10 @@
     <div class="row gx-1">
       <!-- blog posts -->
       <div class="">
-        <div class="row">
+        <div class="grid grid-cols-1 divide-y dark:divide-gray-700">
           {{ $paginator:= .Paginate (where site.RegularPages "Type" "blog") }}
           {{ range $paginator.Pages }}
-          <div class="mb-14">
+          <div class="mb-4 pt-4">
             {{ partial "components/blog-card" . }}
           </div>
           {{ end }}

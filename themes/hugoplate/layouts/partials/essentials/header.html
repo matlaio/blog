@@ -1,29 +1,27 @@
 <style>
-    /* Styles additionnels pour afficher le menu déroulant sur les grands écrans */
-    .dropdown:hover .dropdown-menu,
-    .dropdown-menu:hover {
-      display: block;
-    }
+  .dropdown:hover .dropdown-menu,
+  .dropdown-menu:hover {
+    display: block;
+  }
 
-    .dropdown-menu {
-      transition: opacity 0.3s ease;
-      opacity: 0;
-      display: none;
-    }
+  .dropdown-menu {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    display: none;
+  }
 
-    .dropdown:hover .dropdown-menu {
-      opacity: 1;
-    }
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+  }
 
-    /* Styles pour afficher le menu mobile et les sous-menus */
-    .mobile-menu-hidden {
-      display: none;
-    }
+  .mobile-menu-hidden {
+    display: none;
+  }
 
-    .mobile-menu-visible {
-      display: block;
-    }
-  </style>
+  .mobile-menu-visible {
+    display: block;
+  }
+</style>
 
 
 
@@ -33,7 +31,7 @@
 
 
 <header
-  class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30 bg-theme-light dark:bg-darkmode-theme-light  shadow-md">
+  class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30 bg-theme-light dark:bg-darkmode-theme-light shadow-md">
 
   <div class="container mx-auto px-4 grid md:grid-cols-5 md:gap-4 items-center grid-cols-3 gap-3">
 
@@ -46,7 +44,7 @@
 
     <!-- Menu de Navigation Centré - Colonnes 2-4 -->
     <nav class="md:col-span-3">
-      <ul class="hidden md:flex space-x-14 justify-center items-center min-h-20">
+      <ul class="hidden md:flex space-x-14 justify-center items-center min-h-14">
         {{ $currentPage := . }}
         {{ range site.Menus.main }}
         {{ $menuURL := .URL | absLangURL }}
@@ -54,7 +52,7 @@
         {{ $active := eq $menuURL $pageURL }}
         {{ if .HasChildren }}
         <li class="relative dropdown">
-          <button class="text-lg text-black flex items-center dark:text-white">
+          <button class="text-md text-black flex items-center dark:text-white">
             {{ .Name }}
             <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +63,8 @@
           <ul class="dropdown-menu absolute w-48 bg-theme-light dark:bg-darkmode-theme-light z-10 ">
             {{ range .Children }}
             <li>
-              <a href="{{ .URL | absLangURL }}" class="block px-4 py-2 text-dark dark:text-white  hover:bg-gray-200 dark:hover:bg-neutral-900">
+              <a href="{{ .URL | absLangURL }}"
+                class="block px-4 py-2 text-dark dark:text-white  hover:bg-gray-200 dark:hover:bg-neutral-900">
                 {{ .Name }}
               </a>
             </li>
@@ -75,9 +74,17 @@
         {{ else }}
         <li>
           <a href="{{ $menuURL }}"
-            class="text-lg text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}">
-            {{ .Name }}
+            class="text-md text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}">
+            a{{ .Name }}
           </a>
+          <a class="text-md text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}" {{ if findRE `^http` .URL }} target="_blank"
+            rel="noopener" {{ end }} href="{{- if findRE `^#` .URL -}}
+                    {{- if not $.IsHome -}}
+                      {{- site.Home.RelPermalink -}}
+                    {{- end }}{{- .URL -}}
+                  {{- else -}}
+                    {{- .URL | relLangURL -}}
+                  {{- end -}}">{{ .Name }}</a>
         </li>
         {{ end }}
         {{ end }}
@@ -122,7 +129,8 @@
       {{ if .HasChildren }}
       <!-- Menu déroulant mobile pour "Pages" -->
       <div class="w-full pb-4">
-        <button class="text-xl text-black dark:text-white flex items-center w-full justify-center mobile-dropdown-button">
+        <button
+          class="text-xl text-black dark:text-white flex items-center w-full justify-center mobile-dropdown-button">
           {{ .Name }}
           <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
