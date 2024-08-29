@@ -41,7 +41,7 @@
         {{ partial "logo" }}
       </a>
     </div>
-
+    {{ $currentPage := . }}
     <!-- Menu de Navigation Centré - Colonnes 2-4 -->
     <nav class="md:col-span-3">
       <ul class="hidden md:flex space-x-14 justify-center items-center min-h-14">
@@ -49,6 +49,9 @@
         {{ range site.Menus.main }}
         {{ $menuURL := .URL | absLangURL }}
         {{ $pageURL := $currentPage.Permalink | absLangURL }}
+        {{ if not (hasPrefix $menuURL "/") }}
+          {{ $menuURL = (printf "/%s" $menuURL) }}
+        {{ end }}
         {{ $active := eq $menuURL $pageURL }}
         {{ if .HasChildren }}
         <li class="relative dropdown">
@@ -73,7 +76,6 @@
         </li>
         {{ else }}
         <li>
-          <p> active {{ $active }} menu url {{ $menuURL }} page url {{ $pageURL }} </p>
           <a class="text-md text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}" {{ if findRE `^http` .URL }} target="_blank"
             rel="noopener" {{ end }} href="{{- if findRE `^#` .URL -}}
                     {{- if not $.IsHome -}}
