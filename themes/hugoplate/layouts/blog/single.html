@@ -27,7 +27,6 @@
             <li class="mr-4 inline-block">
               <i class="fa-regular fa-stopwatch mr-2"></i>
               {{ $timeread := .ReadingTime}}
-              {{ $timeread }}
               {{ if eq $timeread  1 }} 
               minute
               {{ else }}
@@ -42,8 +41,10 @@
             </div>
           {{ end }}
           <div class="content mb-10">
-            {{ .TableOfContents }}
+            {{ $display_toc := .Params.table_of_contents }}
+            {{ if $display_toc }}
             {{ partial "toc.html" (dict "Class" "blog" "Collapsed" false "TableOfContents" .TableOfContents ) }}
+            {{ end }}
             {{ .Content }}
           </div>
           <div class="row items-start justify-between">

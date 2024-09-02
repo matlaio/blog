@@ -1,0 +1,71 @@
+<script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+
+{{ $darkTheme := resources.Get "plugins/vegalite/vegalite-dark-theme.js" | resources.Fingerprint }}
+{{ $lightTheme := resources.Get "plugins/vegalite/vegalite-light-theme.js" | resources.Fingerprint }}
+
+<div id="{{ .Get "id" }}" class="w-full"></div>
+
+<script>
+// Fonction pour obtenir le thème actuel du localStorage ou utiliser le thème par défaut
+function getCurrentTheme() {
+    var savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        return savedTheme;
+    } else {
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return prefersDark ? 'dark' : 'light';
+    }
+}
+
+// Configuration du graphique Vega-Lite
+var spec = {{ .Inner | safeJS }};
+
+// Appliquer les styles de thème
+function applyThemeToVega(spec) {
+    var theme = getCurrentTheme();
+    if (theme === 'dark') {
+        spec.config = {
+            background: '#1c1c1c',
+            axis: {
+                domainColor: '#FFFFFF',
+                gridColor: '#888888',
+                tickColor: '#FFFFFF',
+                labelColor: '#FFFFFF',
+                titleColor: '#FFFFFF'
+            },
+            legend: {
+                labelColor: '#FFFFFF',
+                titleColor: '#FFFFFF'
+            }
+        };
+    } else {
+        spec.config = {
+            background: '#FFFFFF',
+            axis: {
+                domainColor: '#000000',
+                gridColor: '#DDDDDD',
+                tickColor: '#000000',
+                labelColor: '#000000',
+                titleColor: '#000000'
+            },
+            legend: {
+                labelColor: '#000000',
+                titleColor: '#000000'
+            }
+        };
+    }
+}
+
+// Appliquer le thème et intégrer la visualisation
+applyThemeToVega(spec);
+vegaEmbed('#{{ .Get "id" }}', spec, { actions: false });
+
+// Réappliquer le thème lorsque le thème change
+document.addEventListener('theme-changed', function() {
+    applyThemeToVega(spec);
+    vegaEmbed('#{{ .Get "id" }}', spec, { actions: false });
+});
+</script>
+

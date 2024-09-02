@@ -185,6 +185,7 @@
       moonIcon.classList.remove('hidden');
       localStorage.setItem('theme', 'dark');
     }
+    document.dispatchEvent(new Event('theme-changed'));
   });
 
   applyTheme();

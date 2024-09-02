@@ -3,17 +3,156 @@ title: "How to build an Application with modern Technology"
 meta_title: ""
 description: "this is meta description"
 date: 2022-04-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: ""
 categories: ["Application", "Data"]
 author: "John Doe"
 tags: ["nextjs", "tailwind","tailwind","tailwind","tailwind","tailwind","tailwind","tailwind","tailwind","tailwind",]
 draft: false
+table_of_contents: true
+mermaid: true
 ---
+
+
 
 Lorem  l'a L'a ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit. 
 
+
+{{< mermaid >}}
+flowchart LR
+    y("👫 You") --> h{"🤝 Found this helpful?"}
+    h --> |Yes| r[/"⭐ Check out my featured posts!"/]
+    h --> |No| su[/"📝 Suggest changes by clicking near the title"/]
+    click r "/categories/featured" _blank
+{{< /mermaid >}}
+
+
+{{< mermaid >}}
+quadrantChart
+    title Reach and engagement of campaigns
+    x-axis Low Reach --> High Reach
+    y-axis Low Engagement --> High Engagement
+    quadrant-1 We should expand
+    quadrant-2 Need to promote
+    quadrant-3 Re-evaluate
+    quadrant-4 May be improved
+    Campaign A: [0.3, 0.6]
+    Campaign B: [0.45, 0.23]
+    Campaign C: [0.57, 0.69]
+    Campaign D: [0.78, 0.34]
+    Campaign E: [0.40, 0.34]
+    Campaign F: [0.35, 0.78]
+{{< /mermaid >}}
+
+
+
+eazeazeazea
+
+{{< vegalite id="monGraphique" >}}
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "description": "Un simple graphique à barres.",
+  "data": {
+    "values": [
+      {"category": "A", "value": 28},
+      {"category": "B", "value": 55},
+      {"category": "C", "value": 43},
+      {"category": "D", "value": 91},
+      {"category": "E", "value": 81},
+      {"category": "F", "value": 53},
+      {"category": "G", "value": 19},
+      {"category": "H", "value": 87}
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {"field": "category", "type": "nominal", "axis": {"labelAngle": 0}},
+    "y": {"field": "value", "type": "quantitative"},
+    "tooltip": [{"field": "value", "type": "quantitative", "title": "Valeur"}]
+  }
+}
+{{< /vegalite >}}
+
+
+Encore un gaaoh
+
+{{< vegalite id="graph2" >}}
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "description": "Un simple graphique à barres.",
+  "data": {
+    "values": [
+      {"category": "A", "value": 28},
+      {"category": "B", "value": 55},
+      {"category": "C", "value": 43},
+      {"category": "D", "value": 91},
+      {"category": "E", "value": 81}
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {"field": "category", "type": "nominal", "axis": {"labelAngle": 0}},
+    "y": {"field": "value", "type": "quantitative"},
+    "tooltip": [{"field": "value", "type": "quantitative", "title": "Valeur"}]
+  }
+}
+{{< /vegalite >}}
+
+
+{{< vegalite id="graph3" >}}
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "description": "Un simple graphique à barres.",
+  "data": {
+    "values": [
+      {"category": "A", "value": 28},
+      {"category": "B", "value": 55},
+      {"category": "C", "value": 43},
+      {"category": "D", "value": 91},
+      {"category": "E", "value": 81},
+      {"category": "F", "value": 53}
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {"field": "category", "type": "nominal", "axis": {"labelAngle": 0}},
+    "y": {"field": "value", "type": "quantitative"},
+    "tooltip": [{"field": "value", "type": "quantitative", "title": "Valeur"}]
+  }
+}
+{{< /vegalite >}}
+
+
+
 ## titre 2
-eee
+```mermaid
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail!
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!
+```
+
+
+
+
 
 ### Titre 3
 
