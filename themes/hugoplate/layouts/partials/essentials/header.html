@@ -1,7 +1,26 @@
+<style>
+  #theme-toggle {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  #theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+</style>
+
 <header
   class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30 bg-theme-light dark:bg-darkmode-theme-light shadow-md">
 
-  <div class="container mx-auto px-4 grid md:grid-cols-5 md:gap-4 items-center grid-cols-3 gap-3">
+  <div class="container mx-auto px-4 grid  md:gap-4 items-center grid-cols-3 gap-3">
 
     <!-- Bloc Gauche (Logo) - Colonne 1 -->
     <div class="">
@@ -11,7 +30,7 @@
     </div>
     {{ $currentPage := . }}
     <!-- Menu de Navigation Centré - Colonnes 2-4 -->
-    <nav class="md:col-span-3">
+    <nav class="">
       <ul class="hidden md:flex space-x-14 justify-center items-center min-h-14">
         {{ $currentPage := . }}
         {{ range site.Menus.main }}
@@ -63,7 +82,7 @@
       {{ with site.Params.search }}
       {{ if .enable }}
       <button aria-label="search"
-        class=" text-dark hover:text-primary dark:border-darkmode-border inline-block  md:pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
+        class=" text-dark hover:text-primary dark:border-darkmode-border inline-block  text-xl dark:text-white dark:hover:text-darkmode-primary"
         data-target="search-modal">
         <i class="fa-solid fa-search"></i>
       </button>
@@ -72,10 +91,9 @@
 
       <!-- Bouton de changement de thème avec SVG -->
       <button data-theme-switcher id="theme-toggle"
-        class="w-8 h-8 bg-dark text-white hover:bg-gray-500 rounded-full flex items-center justify-center dark:bg-white dark:text-dark">
-
+        class="w-10 h-10 bg-dark text-white hover:bg-gray-500 rounded-full flex items-center justify-center dark:bg-white dark:text-dark">
         <!-- Icône de soleil (visible par défaut) -->
-        <svg id="theme-toggle-sun" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        <svg id="theme-toggle-sun" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5" stroke-linecap="round" stroke-linejoin="round"></circle>
           <line x1="12" y1="1" x2="12" y2="3" stroke-linecap="round" stroke-linejoin="round"></line>
@@ -88,11 +106,15 @@
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke-linecap="round" stroke-linejoin="round"></line>
         </svg>
         <!-- Icône de lune (cachée par défaut) -->
-        <svg id="theme-toggle-moon" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
+        <svg id="theme-toggle-moon" class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
           viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
         </svg>
       </button>
+
+      {{ partial "components/language-switcher" (dict "Context" . "Class" "py-1 dark:bg-darkmode-theme-light rounded")
+      }}
+
 
       <!-- Menu Burger (affiché uniquement sur mobile) -->
       <button id="burger-menu" class="md:hidden text-black dark:text-white">
@@ -102,6 +124,7 @@
         </svg>
       </button>
     </div>
+
   </div>
 
   <!-- Menu Mobile (initialement masqué) -->

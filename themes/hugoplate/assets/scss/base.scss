@@ -99,3 +99,21 @@ code {
 .mobile-menu-visible {
   display: block;
 }
+
+// Button light/dark mode
+#theme-toggle {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}

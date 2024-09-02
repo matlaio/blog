@@ -1,0 +1,59 @@
+{{ if .Params.vegalite }}
+
+<script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+
+{{ $darkTheme := resources.Get "plugins/vegalite/vegalite-dark-theme.js" | resources.Fingerprint }}
+{{ $lightTheme := resources.Get "plugins/vegalite/vegalite-light-theme.js" | resources.Fingerprint }}
+
+
+
+<script>
+  function getCurrentTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme;
+    } else {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return prefersDark ? 'dark' : 'light';
+    }
+  }
+
+  window.applyThemeToVega = function (spec) {
+    const theme = getCurrentTheme();
+    if (theme === 'dark') {
+      spec.config = {
+        background: '#1e1e1e',
+        axis: {
+          domainColor: '#fff',
+          gridColor: '#444',
+          tickColor: '#fff',
+          labelColor: '#fff',
+          titleColor: '#fff'
+        },
+        legend: {
+          labelColor: '#fff',
+          titleColor: '#fff'
+        }
+      };
+    } else {
+      spec.config = {
+        background: '#fff',
+        axis: {
+          domainColor: '#000',
+          gridColor: '#ddd',
+          tickColor: '#000',
+          labelColor: '#000',
+          titleColor: '#000'
+        },
+        legend: {
+          labelColor: '#000',
+          titleColor: '#000'
+        }
+      };
+    }
+  }
+
+</script>
+{{ end }}
