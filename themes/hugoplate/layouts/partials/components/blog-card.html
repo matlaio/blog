@@ -37,7 +37,7 @@
       {{ end }}
     </li>
   </ul>
-  <p><a href="{{ .RelPermalink }}">{{ .Summary }}</a></p>
+  <p><a href="{{ .RelPermalink }}">{{ .Summary | plainify }}</a></p>
 </div>
 
 

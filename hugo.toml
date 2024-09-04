@@ -10,7 +10,7 @@ timeZone = "Europe/Paris"
 # post pagination
 pagination.pagerSize = 3 # see https://gohugo.io/extras/pagination/
 # post excerpt
-summaryLength = 10 # see https://gohugo.io/content-management/excerpts/
+summaryLength = 15 # see https://gohugo.io/content-management/excerpts/
 # google analytics
 googleAnalytics = "G-MEASUREMENT_ID" # see https://gohugo.io/templates/internal/#configure-google-analytics
 # disqus short name
