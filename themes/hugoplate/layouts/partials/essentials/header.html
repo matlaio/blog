@@ -42,7 +42,7 @@
         {{ $active := eq $menuURL $pageURL }}
         {{ if .HasChildren }}
         <li class="relative dropdown">
-          <button class="text-md text-black flex items-center dark:text-white">
+          <button class="text-lg text-black flex items-center dark:text-white">
             {{ .Name }}
             <svg class="inline h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +63,7 @@
         </li>
         {{ else }}
         <li>
-          <a class="text-md text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}" {{ if findRE
+          <a class="text-lg text-black dark:text-white  hover:underline {{ if $active }}font-bold{{ end }}" {{ if findRE
             `^http` .URL }} target="_blank" rel="noopener" {{ end }} href="{{- if findRE `^#` .URL -}}
                     {{- if not $.IsHome -}}
                       {{- site.Home.RelPermalink -}}
@@ -90,7 +90,7 @@
       {{ end }}
 
       <!-- Bouton de changement de thème avec SVG -->
-      <button data-theme-switcher id="theme-toggle"
+      <button data-theme-switcher id="theme-toggle" aria-label="Language selector" title="Language selector"
         class="w-10 h-10 bg-dark text-white hover:bg-gray-500 rounded-full flex items-center justify-center dark:bg-white dark:text-dark">
         <!-- Icône de soleil (visible par défaut) -->
         <svg id="theme-toggle-sun" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"

@@ -1,0 +1,14 @@
+<div class="mb-8">
+    <h5 class="mb-6">Featured articles</h5>
+    <div class="grid grid-cols-1 divide-y bg-theme-light dark:bg-darkmode-theme-light rounded  dark:divide-zinc-700 p-6">
+        {{ $featuredPages := where .Site.Pages "Params.featured" true }}
+            {{ range $featuredPages }}
+            <li class="inline-block">
+                <a class="active m-1 block py-1 hover:text-primary dark:hover:text-darkmode-primary " href="{{ .RelPermalink }}">
+                    {{ .Title }}
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+      </div>
+</div>

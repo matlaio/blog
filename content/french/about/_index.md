@@ -4,6 +4,7 @@ meta_title: "About"
 description: "this is meta description"
 image: "/images/avatar.png"
 draft: false
+featured: true
 ---
 
 Blog pour partager quelques trucs sympas sur de la tech !

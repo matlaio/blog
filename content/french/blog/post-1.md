@@ -11,6 +11,7 @@ draft: false
 table_of_contents: true
 mermaid: true
 vegalite: true
+featured: true
 ---
 
 

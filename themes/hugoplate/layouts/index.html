@@ -10,7 +10,7 @@
     <div class="row gx-1">
       <!-- blog posts -->
       <div class="">
-        <div class="grid grid-cols-1 divide-y dark:divide-gray-700">
+        <div class="grid grid-cols-1 divide-y dark:divide-zinc-700 ">
           {{ $paginator:= .Paginate (where site.RegularPages "Type" "blog") }}
           {{ range $paginator.Pages }}
           <div class="mb-4 pt-4">

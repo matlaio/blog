@@ -23,7 +23,7 @@
         "theme_dark": ""
       },
       "text_color": {
-        "default": "#B4AFB6",
+        "default": "#ddd",
         "dark": "#fff",
         "light": "#B4AFB6"
       }
@@ -31,9 +31,9 @@
   },
   "fonts": {
     "font_family": {
-      "primary": "Montserrat:wght@400;600",
+      "primary": "Public+Sans:wght@400;600",
       "primary_type": "sans-serif",
-      "secondary": "Montserrat:wght@500;700",
+      "secondary": "Source+Sans+3:wght@500;700",
       "secondary_type": "sans-serif"
     },
     "font_size": {
