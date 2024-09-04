@@ -17,9 +17,8 @@ googleAnalytics = "G-MEASUREMENT_ID" # see https://gohugo.io/templates/internal/
 #disqusShortname = "themefisher-template" # we use disqus to show comments in blog posts . To install disqus please follow this tutorial https://portfolio.peter-baumgartner.net/2017/09/10/how-to-install-disqus-on-hugo/
 # disable language
 defaultContentLanguage = 'fr'
-defaultContentLanguageInSubdir = true
-disableLanguages = [
-] # example: ["fr"] for disable french language. see https://gohugo.io/content-management/multilingual/
+defaultContentLanguageInSubdir = false
+disableLanguages = [] # example: ["fr"] for disable french language. see https://gohugo.io/content-management/multilingual/
 hasCJKLanguage = false #  If hasCJKLanguage true, auto-detect Chinese/Japanese/Korean Languages in the content. see: https://gohugo.io/getting-started/configuration/#hascjklanguage
 enableRobotsTXT = true # Search indexation
 
@@ -107,18 +106,20 @@ endLevel = 5
 ordered = true
 
 
-########################### Media types ###########################
-[mediaTypes]
-[mediaTypes."application/manifest+json"]
-suffixes = ["webmanifest"]
+# ########################### Media types ###########################
+# [mediaTypes]
+# [mediaTypes."application/manifest+json"]
+# suffixes = ["webmanifest"]
 
 
-########################### Output Format ##########################
+# ########################### Output Format ##########################
+# [outputFormats]
+# [outputFormats.WebAppManifest]
+# mediaType = "application/manifest+json"
+# rel = "manifest"
+# baseName = "manifest" 
+
 [outputFormats]
-[outputFormats.WebAppManifest]
-mediaType = "application/manifest+json"
-rel = "manifest"
-
 [outputFormats.SearchIndex]
 mediaType = "application/json"
 baseName = "searchindex"
