@@ -1,11 +1,13 @@
 ---
-title: "Elements"
+title: "Sample"
 # meta title
 meta_title: ""
 # meta description
 description: "This is meta description"
 # save as draft
 draft: false
+mermaid: true
+vegalite: true
 ---
 
 {{< toc >}}
@@ -182,17 +184,214 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 This is an `Inline code` sample.
 
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
-
 ```python
 s = "Python syntax highlighting"
 print s
 ```
+Test with shortcode.
+{{< highlight go-html-template >}}
+{{ range .Pages }}
+  <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+{{ end }}
+{{< /highlight >}}
+
 
 <hr>
+
+### Mermaid
+Use memraid with shortcode.
+{{< mermaid >}}
+flowchart LR
+    y("👫 You") --> h{"🤝 Found this helpful?"}
+    h --> |Yes| t[eee]
+    h --> |No| su[eee]
+    click r "/categories/featured" _blank
+{{< /mermaid >}}
+
+
+{{< mermaid >}}
+quadrantChart
+    title Reach and engagement of campaigns
+    x-axis Low Reach --> High Reach
+    y-axis Low Engagement --> High Engagement
+    quadrant-1 We should expand
+    quadrant-2 Need to promote
+    quadrant-3 Re-evaluate
+    quadrant-4 May be improved
+    Campaign A: [0.3, 0.6]
+    Campaign B: [0.45, 0.23]
+    Campaign C: [0.57, 0.69]
+    Campaign D: [0.78, 0.34]
+    Campaign E: [0.40, 0.34]
+    Campaign F: [0.35, 0.78]
+{{< /mermaid >}}
+
+
+### Vega-lite
+Generate charts whith Vega-Lite.
+{{< vegalite id="monGraphique" >}}
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "description": "Un simple graphique à barres.",
+  "data": {
+    "values": [
+      {"category": "A", "value": 28},
+      {"category": "B", "value": 55},
+      {"category": "C", "value": 43},
+      {"category": "D", "value": 91},
+      {"category": "E", "value": 81},
+      {"category": "F", "value": 53},
+      {"category": "G", "value": 19},
+      {"category": "H", "value": 87}
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {"field": "category", "type": "nominal", "axis": {"labelAngle": 0}},
+    "y": {"field": "value", "type": "quantitative"},
+    "tooltip": [{"field": "value", "type": "quantitative", "title": "Valeur"}]
+  }
+}
+{{< /vegalite >}}
+
+
+{{< vegalite id="graphcomplex" >}}
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": "600",
+  "height": 500,
+  "padding": 5,
+  "title": {
+    "text": "Seattle Annual Temperatures",
+    "anchor": "middle",
+    "fontSize": 16,
+    "frame": "group",
+    "offset": 4
+  },
+  "data": [
+    {
+      "name": "temperature",
+      "url": "https://vega.github.io/vega/data/seattle-weather-hourly-normals.csv",
+      "format": {
+        "type": "csv",
+        "parse": {"temperature": "number", "date": "date"}
+      },
+      "transform": [
+        {"type": "formula", "as": "hour", "expr": "hours(datum.date)"},
+        {
+          "type": "formula",
+          "as": "day",
+          "expr": "datetime(year(datum.date), month(datum.date), date(datum.date))"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "time",
+      "domain": {"data": "temperature", "field": "day"},
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "type": "band",
+      "domain": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "range": "height"
+    },
+    {
+      "name": "color",
+      "type": "linear",
+      "range": {"scheme": "redyellowblue"},
+      "domain": {"data": "temperature", "field": "temperature"},
+      "reverse": true,
+      "zero": false,
+      "nice": true
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "x",
+      "domain": false,
+      "title": "Month",
+      "format": "%b"
+    },
+    {
+      "orient": "left",
+      "scale": "y",
+      "domain": false,
+      "title": "Hour",
+      "encode": {
+        "labels": {
+          "update": {
+            "text": {
+              "signal": "datum.value === 0 ? 'Midnight' : datum.value === 12 ? 'Noon' : datum.value < 12 ? datum.value + ':00 am' : (datum.value - 12) + ':00 pm'"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "type": "gradient",
+      "title": "Avg. Temp (°F)",
+      "titleFontSize": 12,
+      "titlePadding": 4,
+      "gradientLength": {"signal": "height - 16"}
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "temperature"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "x", "field": "day"},
+          "y": {"scale": "y", "field": "hour"},
+          "width": {"value": 5},
+          "height": {"scale": "y", "band": 1},
+          "tooltip": {
+            "signal": "timeFormat(datum.date, '%b %d %I:00 %p') + ': ' + datum.temperature + '°'"
+          }
+        },
+        "update": {"fill": {"scale": "color", "field": "temperature"}}
+      }
+    }
+  ]
+}
+{{< /vegalite >}}
 
 ### Blockquote
 
@@ -228,12 +427,3 @@ print s
 
 <hr>
 
-### Youtube video
-
-{{< youtube ResipmZmpDU >}}
-
-<hr>
-
-### Custom video
-
-{{< video src="https://www.w3schools.com/html/mov_bbb.mp4" width="100%" height="auto" autoplay="false" loop="false" muted="false" controls="true" class="rounded-lg" >}}
