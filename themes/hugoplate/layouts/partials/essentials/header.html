@@ -37,7 +37,6 @@
         {{ $menuURL := .URL | absLangURL }}
         {{ $pageURL := $currentPage.Permalink | absLangURL }}
         {{ $active := eq $menuURL $pageURL }}
-        <p> {{ $menuURL }} {{ $pageURL }} </p>
         {{ if .HasChildren }}
         <li class="relative dropdown">
           <button class="text-lg text-black flex items-center dark:text-white">
