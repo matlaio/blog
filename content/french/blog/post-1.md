@@ -133,7 +133,9 @@ Encore un gaaoh
 
 
 ## titre 2
-```mermaid
+Essai `ee`
+
+```text
 sequenceDiagram
     participant Alice
     participant Bob

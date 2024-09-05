@@ -76,6 +76,9 @@
 
     <!-- Bloc Droit (Icônes/Boutons) - Colonne 5 -->
     <div class="flex justify-end space-x-4">
+
+      {{ partial "components/language-switcher" (dict "Context" . "Class" "py-1 dark:bg-darkmode-theme-light rounded") }}
+
       {{ with site.Params.search }}
       {{ if .enable }}
       <button aria-label="search"
@@ -109,8 +112,7 @@
         </svg>
       </button>
 
-      {{ partial "components/language-switcher" (dict "Context" . "Class" "py-1 dark:bg-darkmode-theme-light rounded")
-      }}
+      
 
 
       <!-- Menu Burger (affiché uniquement sur mobile) -->

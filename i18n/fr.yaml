@@ -31,3 +31,6 @@
 - id: empty_search_results_placeholder
   translation: Commencer à écrire...
 
+- id: featured_articles
+  translation: Articles phares
+

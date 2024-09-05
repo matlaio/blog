@@ -1,5 +1,5 @@
 <div class="mb-8">
-    <h5 class="mb-6">Featured articles</h5>
+    <h5 class="mb-6">{{ i18n "featured_articles" }}</h5>
     <div class="grid grid-cols-1 divide-y bg-theme-light dark:bg-darkmode-theme-light rounded  dark:divide-zinc-700 p-6">
         {{ $featuredPages := where .Site.Pages "Params.featured" true }}
             {{ range $featuredPages }}

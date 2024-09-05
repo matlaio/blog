@@ -1,5 +1,5 @@
 ---
-title: "Liens et ressources intéressantes"
+title: "Ressources et liens intéressants"
 meta_title: ""
 date: 2024-08-21T23:28:27+02:00
 draft: false

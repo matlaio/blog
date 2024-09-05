@@ -18,12 +18,12 @@ hasChildren = true
 
 [[main]]
 parent = "Pages"
-name = "Categories"
+name = "Catégories"
 url = "categories/"
 
 [[main]]
 parent = "Pages"
-name = "Ressources & Liens"
+name = "Ressources & Liens intéressants"
 url = "ressources/"
 
 # footer menu
