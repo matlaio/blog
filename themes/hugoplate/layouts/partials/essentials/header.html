@@ -36,10 +36,8 @@
         {{ range site.Menus.main }}
         {{ $menuURL := .URL | absLangURL }}
         {{ $pageURL := $currentPage.Permalink | absLangURL }}
-        {{ if not (hasPrefix $menuURL "/") }}
-        {{ $menuURL = (printf "/%s" $menuURL) }}
-        {{ end }}
         {{ $active := eq $menuURL $pageURL }}
+        <p> {{ $menuURL }} {{ $pageURL }} </p>
         {{ if .HasChildren }}
         <li class="relative dropdown">
           <button class="text-lg text-black flex items-center dark:text-white">
