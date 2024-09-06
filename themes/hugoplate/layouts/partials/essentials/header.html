@@ -75,20 +75,27 @@
     </nav>
 
     <!-- Bloc Droit (Icônes/Boutons) - Colonne 5 -->
-    <div class="flex justify-end space-x-4">
+    <!-- Bloc Droit (Icônes/Boutons) - Colonne 5 -->
+    <div class="flex justify-end space-x-3"> <!-- Réduit l'espacement horizontal entre les boutons -->
 
+      <!-- Bouton de recherche -->
       {{ with site.Params.search }}
       {{ if .enable }}
       <button aria-label="search"
-        class=" text-dark hover:text-primary dark:border-darkmode-border inline-block  text-xl dark:text-white dark:hover:text-darkmode-primary"
+        class="text-dark hover:text-primary dark:border-darkmode-border inline-block text-xl dark:text-white dark:hover:text-darkmode-primary"
         data-target="search-modal">
-        <i class="fa-solid fa-search"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="feather feather-search">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
       </button>
       {{ end }}
       {{ end }}
 
       <!-- Bouton de changement de thème avec SVG -->
-      <button data-theme-switcher id="theme-toggle" aria-label="Language selector" title="Language selector"
+      <button data-theme-switcher id="theme-toggle" aria-label="Theme selector" title="Theme selector"
         class="w-10 h-10 bg-dark text-white hover:bg-gray-500 rounded-full flex items-center justify-center dark:bg-white dark:text-dark">
         <!-- Icône de soleil (visible par défaut) -->
         <svg id="theme-toggle-sun" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -109,7 +116,10 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
         </svg>
       </button>
-      {{ partial "components/language-switcher" (dict "Context" . "Class" "py-1 dark:bg-darkmode-theme-light rounded") }}
+
+      {{ partial "components/language-switcher" (dict "Context" . "Class" "py-1 dark:bg-darkmode-theme-light rounded")
+      }}
+
       <!-- Menu Burger (affiché uniquement sur mobile) -->
       <button id="burger-menu" class="md:hidden text-black dark:text-white">
         <!-- Icône du menu burger -->
