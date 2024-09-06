@@ -3,11 +3,11 @@
   {{ if $image }}
     <a href="{{ .RelPermalink }}">{{ partial "image" (dict "Src" $image "Alt" .Title "Class" "mb-6 w-full rounded") }}</a>
   {{ end }}
-  <h3 class="mb-3">
+  <h2 class="mb-3 h2 md:h3">
     <a href="{{ .RelPermalink }}">
       {{ .Title }}
     </a>
-  </h3>
+  </h2>
   <ul class="mb-4">
     <li class="mr-4 sm:inline-block">
       <i class="fa-regular fa-calendar mr-2"></i>
