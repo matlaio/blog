@@ -77,8 +77,6 @@
     <!-- Bloc Droit (Icônes/Boutons) - Colonne 5 -->
     <div class="flex justify-end space-x-4">
 
-      {{ partial "components/language-switcher" (dict "Context" . "Class" "py-1 dark:bg-darkmode-theme-light rounded") }}
-
       {{ with site.Params.search }}
       {{ if .enable }}
       <button aria-label="search"
@@ -111,10 +109,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
         </svg>
       </button>
-
-      
-
-
+      {{ partial "components/language-switcher" (dict "Context" . "Class" "py-1 dark:bg-darkmode-theme-light rounded") }}
       <!-- Menu Burger (affiché uniquement sur mobile) -->
       <button id="burger-menu" class="md:hidden text-black dark:text-white">
         <!-- Icône du menu burger -->
