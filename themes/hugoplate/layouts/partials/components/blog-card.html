@@ -3,13 +3,12 @@
   {{ if $image }}
     <a href="{{ .RelPermalink }}">{{ partial "image" (dict "Src" $image "Alt" .Title "Class" "mb-6 w-full rounded") }}</a>
   {{ end }}
-  <h4 class="mb-3">
+  <h3 class="mb-3">
     <a href="{{ .RelPermalink }}">
       {{ .Title }}
     </a>
-  </h4>
+  </h3>
   <ul class="mb-4">
-  
     <li class="mr-4 sm:inline-block">
       <i class="fa-regular fa-calendar mr-2"></i>
       {{ time.Format ":date_long" .PublishDate }}
@@ -30,7 +29,7 @@
       <i class="fa-regular fa-stopwatch mr-2"></i>
       {{ $timeread := .ReadingTime}}
       {{ $timeread }}
-      {{ if eq $timeread  1 }} 
+      {{ if eq $timeread  1 }}
       minute
       {{ else }}
       minutes
