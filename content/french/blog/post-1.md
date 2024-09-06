@@ -17,6 +17,8 @@ featured: true
 Salaut ceci est texte d'exemple de résumé pour vérifier la longueur ou non ca marche.
 
 
+## Création de la clé
+
 {{< mermaid >}}
 flowchart LR
     y("👫 You") --> h{"🤝 Found this helpful?"}
