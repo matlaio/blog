@@ -11,39 +11,39 @@ Lors du `push`, le serveur Git demande vos informations pour s'authentifier. Plu
 * via token
 * via clé SSH
 
-Cette authentification avec le profil garantie que l'utilisateur a le droit de `push` son code sur le répertoire Git.
-C'est parfait pour commencer un projet avec une petite équipe.  
+Ces trois méthodes authentifient l'utilisateur afin de pouvoir récupérer son profil Git (droit de push, droit de merge...).
 
 Cependant, les projets communautaires avec des milliers de commits sont victimes de convoitises pour introduire du code malicieux.
-L'une des surfaces d'attaque est de réussir à "voler" l'authentification de l'utilisateur.  
-Par exemple, subtiliser le token d'un utilisateur avec le rôle *admin*. Cette admin peut valider et *push* du code sur la branche *master*.
-Puis, le pirate pourra créer et publier une nouvelle version du projet, tel que compromettre un package python sur *pip*.
+L'une des surfaces d'attaque est de réussir à 'voler' l'authentification de l'utilisateur.  
+Par exemple, subtiliser le token d'un utilisateur avec le rôle *admin*. Cet admin peut valider et *push* du code sur la branche *master*.
+Puis, le pirate pourra créer et publier une nouvelle version du projet, par exemple en compromettant un package Python sur *pip*.
 
 L'une des solutions visant à réduire la surface d'attaque est de signer ses commits.  
 La signature des commits permet de s'assurer que le code provient bien de l'utilisateur à l'origine du commit. Le mécanisme de signature utilisé est GPG.
-Il est nécessaire de créer, une clé privée et la clé publique associée.  
-La clé privée est utilisée pour signer le commit, tandis que la publique est à soumettre sur au serveur Git (Github, Gitlab...), 
+Pour ce faire, il est nécessaire de créer la clé privée et la clé publique associée.  
+La clé privée est utilisée pour signer le commit, tandis que la clé publique doit être soumise au serveur Git (Github, Gitlab...), 
 afin que le serveur puisse vérifier la signature du commit avec la clé publique.
 
-### Configurer son environnement
+## Configurer son environnement
 Les pré-requis suivants sont nécessaires :
-* git
-* gpg (installer avec git bash sur Windows)
+* Git
+* GPG (installer avec Git Bash sur Windows)
 
 Nous utiliserons un terminal pour réaliser les différentes étapes.  
-Sur Windows privilégier l'utilisation de git bash car sinon vous allez avoir des problèmes sur la configuration de gpg avec git.
+Sur Windows, il est préférable d'utiliser Git Bash, car sinon vous risquez d'avoir des problèmes avec la configuration de GPG et Git. 
+Par défaut Git cherche les clés dans le répertoire `%USERPROFILE%\.gnupg`, tandis que GPG via Powershell/Console lit le répertoire  `%USERPROFILE%\AppData\Roaming\gnupg`
 
 Les étapes suivantes couvrent la création jusqu'au *push* du premier commit signé :
 
-### Créer la clé gpg
+## Créer la clé GPG
 ```bash
 $ gpg --full-generate-key
 ```
-* utiliser RSA and RSA
-* choisir 4096 bits
+* utiliser RSA par défaut.
+* choisir 4096 bits pour accroître la robustesse.
 * l'expiration à 0 pour avoir une clé valide sans date de péremption. Sinon pour 12 mois alors mettre 12m.
-* renseigner le nom de la clé, par exemple le nom du compte git.
-* le mail doit être le même que celui de l'utilisateur git.
+* renseigner le nom de la clé, par exemple le nom du compte Git.
+* le mail doit être le même que celui de l'utilisateur Git.
 * valider puis saisir le mot de passe.
 
 {{< notice "tip" >}}
@@ -51,15 +51,15 @@ Je recommande de garder précieusement votre mot de passe dans un endroit sécur
 Attention, il n'existe aucun moyen de retrouver le mot de passe perdu d'une clé !
 {{< /notice >}}
 
-### Créer un backup de la clé
+## Créer un backup de la clé
 Cette étape est facultative, mais est recommandée afin de conserver sa clé en sécurité dans un autre endroit autre que son PC.
 Récupération de la clé :
 ```bash
 $ gpg --list-secret-keys --keyid-format LONG
 ```
-Cette commande renvoie la liste des clés existante avec les identifiants associés.
+Cette commande renvoie la liste des clés existantes avec les identifiants associés.
 
-Dans l'exemple ci-dessous utiliser l'identifiant le clé long (souligné BA286856AF0B6AE8E5B7D2A9CB229937293F6BD7).
+Dans l'exemple ci-dessous utiliser l'identifiant de clé longue (souligné BA286856AF0B6AE8E5B7D2A9CB229937293F6BD7).
 
 {{< highlight go "hl_lines=8, linenostart=199" >}}
 $  gpg --list-secret-keys --keyid-format LONG
@@ -87,31 +87,32 @@ gpg --armor --export-secret-keys  <ID clé> > private_key.asc
 ```
 
 {{< notice "tip" >}}
-Garder la clé private key que pour vous. Elle ne doit jamais être partagée.  
+Garder la clé privée que pour vous. Elle ne doit jamais être partagée.  
 De mon côté, je la stocke dans le gestionnaire de mot de passe KeePassXC.
 {{< /notice >}}
 
 
-### Ajouter la clé privée dans sa configuration git
-Maintenant, nous devons configurer git pour qu'il utilise la bonne clé privée afin de signer les commits.
-Je recommande de renseigner la clé GPG uniquement avec la profile local de git.
-C'est-à-dire que la clé est seulement utilisée pour le répertoire git concernée et non en global sur l'ensemble du PC.
-Cette configuration permet de jongler facilement entre plusieurs comptes git et projets.
+### Ajouter la clé privée dans sa configuration Git
+Maintenant, nous devons configurer Git pour qu'il utilise la bonne clé privée afin de signer les commits.
+Je recommande de renseigner la clé GPG uniquement avec le profil local de Git.
+C'est-à-dire que la clé est seulement utilisée pour le répertoire Git concerné et non en global sur l'ensemble du PC.
+Cette configuration permet de jongler facilement entre plusieurs comptes Git et projets Git.
 
-Avant d'associer la clé, il est nécessaire de se placer dans le répertoire du projet git.
+Avant d'associer la clé, il est nécessaire de se placer dans le répertoire du projet Git.
 ```bash
+$ cd <mon projet git>
 $ git config --local user.signingkey <ID clé>
 ```
 
-Activation du GPG sur git :
+Activation du GPG sur Git :
 ```bash
 git config --local commit.gpgsign true
 ```
 
 ### Tester et vérifier la signature d'un commit
-Encore une fois, placer son terminal dans le projet git.  
+Encore une fois, placer son terminal dans le projet Git.  
 Modifier un fichier et commit les changements.  
-Une fenêtre vous demandant le mot de passe de la clé privée apparaît. Vous devez saisir le mot de passe de la clé.
+Saisir le mot de passe de la clé privée dans la fenêtre qui apparaît. Vous devez saisir le mot de passe de la clé.
 ```bash
 git add myfile.txt
 git commit -m "Test GPG"
@@ -136,10 +137,10 @@ Dans cet exemple, le commit a été signé, puis la l'option `show-signature` a 
 
 
 ### Associer la clé à son compte (Github, Gitlab, Gitea...)
-La clé publique doit être associée à son compte sur le serveur Git.  Cela permettra au serveur de valider tous vos commits.  
+La clé publique doit être associée à son compte sur le serveur Git. Cela permettra au serveur de valider tous vos commits.  
 Cette étape est simple à réaliser, il suffit se référer à la documentation de Github, Gitlab...  
 
-Dans un premier temps, il faut récupérer ca clé publique. Ne pas envoyer (et jamais) envoyer la clé privée.
+Dans un premier temps, il faut récupérer ça clé publique. Ne pas envoyer (et jamais) envoyer la clé privée.
 ```bash
 gpg --armor --export <ID clé>
 ```
@@ -158,8 +159,8 @@ FrGK3W3nqCvkC5qB4E8S1i025hJEoBwaB1Y5XlwIs8hSrTz4LDm+L52zSsJ5OhVW
 
 ```
 
-Finalement, cette clé publique doit être ajoutée son compte Git.  
-Sur vos prochains commits Git affichera que le commit est vérifié.
+Enfin, cette clé publique doit être ajoutée à votre compte Git.  
+Sur vos prochains commits, Git affichera que le commit est vérifié.
 
 ## Conclusion
 Dans cet article, nous avons vu comment configurer GPG. Cette configuration est simple à appliquer et rapidement de nombreux bénéfices.
