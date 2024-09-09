@@ -1,8 +1,8 @@
 ---
 title: "Signer ses commits sur Git avec GPG"
 date: 2024-09-06T18:30:14+02:00
-categories: ['git', 'sécurité']
 draft: false
+categories: ['git', 'sécurité']
 tags: ['git', 'sécurité', 'bash', 'terminal', 'gpg']
 ---
 
