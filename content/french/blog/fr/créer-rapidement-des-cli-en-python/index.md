@@ -4,6 +4,7 @@ date: 2024-09-09T23:31:27+02:00
 draft: false
 categories: ['cli', 'pyhton']
 tags: ['cli', 'python', 'script', 'terminal']
+imagepopup: true
 ---
 
 En tant qu'informaticien, j'ai pour principe d'éviter de faire des tâches redondantes avec un ordinateur.
@@ -40,7 +41,7 @@ Vous avez compris que je me suis basé sur la commande `ls` qui est utilisé pou
 Il est possible de combiner tous le vocabulaire vu ci-dessus en une seule commande : `ls -la --human-readable -I "*.log" my/path`.  
 
 Pour développer des scripts CLI en python, je me base sur ce vocabulaire afin de conserver une logique de fonctionnement universelle.
-De plus, le langage python étant permissif pour la création de script, il est important quelques règles dans le but de faciliter l'usage des scripts. Et aussi de pouvoir améliorer après plusieurs semaines de pause sans être perdu dans le code !
+De plus, le langage python étant permissif pour la création de script, il est important d'avoir quelques règles dans le but de faciliter l'usage des scripts. Et aussi de pouvoir améliorer après plusieurs semaines de pause sans être perdu dans le code !
 
 
 ## Les options classiques d'un script CLI
@@ -53,5 +54,18 @@ Avec l'expérience, on remarque souvent des options identiques dans les CLI. En 
 Les options présentées sont des repères pour les utilisateurs. À titre personnel, il m'arrive fréquemment d'utiliser `-h` pour afficher l'aide quand j'ai besoin de comprendre le fonctionnement d'une commande et découvrir les différentes options disponibles.
 
 
-## Développer son CLI en Python
-TODO trouver un exemple.
+## Préparer son environnement de développement
+Avant de commencer le développement, il est essentiel d'avoir un environnement de développement confortable.
+Dans cette partie, je vais utiliser l'IDE (integrated development environment) pour bénéficier des outils comme l'auto completion, 
+la mode debug et l'accès facile à la documentation. 
+
+
+{{< image-popup src="image.png" thumb="image.png"   alt="Image 1 description" >}}
+
+
+mon pragraphe
+{{< image-popup src="image-1.png" thumb="image-1.png"   alt="Image 1 description" >}}
+
+dzaerzr
+{{< image-popup src="image-2.png" thumb="image-2.png"   alt="Image 1 description" >}}
+

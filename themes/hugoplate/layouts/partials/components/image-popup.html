@@ -1,0 +1,35 @@
+{{ if .Params.imagepopup }}
+
+<!-- Inclure les fichiers CSS et JS de Viewer.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.5/viewer.min.js"></script>
+
+<!-- Initialisation de Viewer.js -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionner toutes les images dans le conteneur
+    const gallery = document.getElementById('viewer-gallery');
+    
+    if (gallery) {
+      const viewer = new Viewer(gallery, {
+        navbar: false, // Désactive la barre de navigation
+        toolbar: {
+          reset: 1,
+          prev: 1,
+          play: {
+            show: 1,
+            size: 'large',
+          },
+          next: 1,
+          rotateLeft: 1,
+          rotateRight: 1,
+          flipHorizontal: 1,
+          flipVertical: 1,
+        },
+      });
+    }
+  });
+</script>
+
+
+{{ end }}
