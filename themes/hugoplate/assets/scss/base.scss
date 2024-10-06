@@ -119,3 +119,10 @@ p > code {
 }
 
 
+/* Appliquer un curseur de loupe sur les images de Viewer.js */
+#viewer-gallery img {
+  cursor: zoom-in; /* Utilise le curseur zoom-in natif de CSS */
+}
+.viewer-backdrop {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
